@@ -76,7 +76,7 @@ public class PricingService {
 
             // Chuyển sang giờ tiếp theo
             currentHour = currentHour.plusHours(1);
-        } // Kết thúc vòng lặp while
+        } 
 
         // Tính hệ số trung bình
         BigDecimal averageMultiplier;

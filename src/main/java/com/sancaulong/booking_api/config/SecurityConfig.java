@@ -47,8 +47,15 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                .requestMatchers("/api/v1/bookings/public/**").permitAll()
+                // === CÁC LINK CÔNG KHAI (Public) ===
+                .requestMatchers("/api/v1/auth/**").permitAll() 
+                .requestMatchers("/api/v1/bookings/public/**").permitAll() 
+                
+                // === CÁC LINK CẦN BẢO MẬT (Private) ===
+                .requestMatchers("/api/v1/bookings/my-bookings").authenticated() 
+                .requestMatchers("/api/v1/bookings/cancel/**").authenticated() 
+                .requestMatchers("/api/v1/bookings/secure/**").authenticated() // <-- THÊM DÒNG NÀY
+                
                 .anyRequest().authenticated() 
             );
 
